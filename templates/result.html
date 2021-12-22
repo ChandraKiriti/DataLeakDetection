@@ -1,0 +1,74 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+</style>
+<body>
+    <ul>
+        <li><a href="{% url 'home' %}">Watermark</a></li>
+        <li><a href="{% url 'index' %}">Embedding</a></li>
+        <li><a href="{% url 'result' %}">Result</a></li>
+    </ul>
+    <form method="post" enctype="multipart/form-data" style="margin: 15px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Upload</button>
+    </form>
+    <hr>
+    <div style="margin: auto; text-align: center;">
+        <button class="btn btn-secondary" onclick="showname()">Decode</button>
+    </div>
+    {% if success == True %}
+    <table class="table">
+        <tr>
+            <td>
+                <div>
+                    <h5>QRCode image</h5>
+                    <img src="{{ MEDIA_PREFIX }}qrcode/test.png">
+                </div>
+            </td>
+            <td>
+                <div id="decoded" style="display: none;">
+                    <h5>The Decoded data is {{result}}</h5>
+                </div>
+            </td>
+        </tr>
+        
+    </table>
+    {% endif %}
+
+    <script>
+
+        function showname() {
+            document.getElementById("decoded").style.display = "block";
+        }
+
+    </script>
+</body>
+</html>

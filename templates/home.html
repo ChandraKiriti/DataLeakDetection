@@ -1,0 +1,107 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+#h1
+{
+    margin-left: 10px;
+    margin-top: 210px;
+    color: #9eec0d;
+}
+
+#Main_Div
+{
+    background-color: #333;
+    width: 520px;
+}
+
+#Entry
+{
+    width: 250px;
+    height: 25px;
+    font-size: large;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+#btn
+{
+    margin-bottom: 15px;
+    margin-left: 200px;
+}
+
+#ans_div
+{
+    background-color: orange;
+    margin-left: 650px;
+    margin-top: -250px;
+    width: 290px;
+}
+
+#ans_had
+{
+    text-align: center;
+    padding: 10px;
+}
+
+#QR
+{
+    background-color: #333;
+    margin-left: 650px;
+    width: 290px;
+    height: 250px;
+}
+</style>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+</style>
+<body>
+    <ul>
+        <li><a href="{% url 'home' %}">Watermark</a></li>
+        <li><a href="{% url 'index' %}">Embedding</a></li>
+        <li><a href="{% url 'result' %}">Result</a></li>
+    </ul>
+    <div id="Main_Div">
+      <form action="/send" method="post">
+          {% csrf_token %}
+          <h1 id="h1">Enter Some Data <input type="text" name="data" id="Entry"></h1>
+          <input type="submit" value="Generate QR Code" id="btn">
+      </form>
+  </div>
+  <div id="ans_div">
+      <h1 id="ans_had">Your Qr Code is: </h1>
+  </div>
+  <div id="QR">
+      {% if data %}
+          <img src="{{MEDIA_PREFIX}}qrcode/test.png">
+      {% else %}
+          <h1>Please Enter Usefull data into datafield to generate some data related Qr Code</h1>
+      {% endif %}
+  </div>
+</body>
+</html>
