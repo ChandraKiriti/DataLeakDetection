@@ -87,10 +87,7 @@ $ python manage.py runserver
 
  ----------------------------------------------- 
 
-## Contributors
-* [Gayatri Srinivasan](https://github.com/gayatri-01)
-* [Amisha Waghela](https://github.com/amisha-w)
-* [Girish Thatte](https://github.com/girishgr8)
+
 
 
 -----------------------------------------------
